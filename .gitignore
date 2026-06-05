@@ -1,0 +1,51 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environnements virtuels
+venv/
+.venv/
+env/
+
+# =========================
+# Django
+# =========================
+*.log
+
+# SQLite (si utilisé pour les tests)
+db.sqlite3
+db.sqlite3-journal
+
+# Fichiers générés
+media/
+staticfiles/
+
+# =========================
+# Variables d'environnement
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Tests / Coverage
+# =========================
+.coverage
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+
+# =========================
+# IDE
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# OS
+# =========================
+.DS_Store
+Thumbs.db
