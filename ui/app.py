@@ -89,14 +89,16 @@ def flush_stdin():
         pass
 
 
-def ask(label, default=None):
-    """Prompt sécurisé : vide le buffer avant de lire."""
+def ask(label, default=""):
+    """Prompt sécurisé : vide le buffer avant de lire, et garantit toujours une str."""
     flush_stdin()
-    return Prompt.ask(label, default=default)
+    result = Prompt.ask(label, default=default)
+    # Prompt.ask peut retourner None si default=None et l'utilisateur appuie sur Entrée
+    return (result or "").strip()
 
 
 def pause():
-    """Pause sécurisée : vide le buffer après lecture."""
+    """Pause sécurisée : vide le buffer avant et après lecture."""
     flush_stdin()
     input("\n  Appuie sur Entrée pour continuer...")
     flush_stdin()
@@ -118,7 +120,8 @@ def header(titre="CLINIQUE VÉTÉRINAIRE - SYSTÈME DE GESTION"):
 
 
 def exit_check(choice):
-    return choice.strip().lower() in ["\\q", "\\exit", "q", "exit", "0"]
+    # choice est déjà une str grâce à ask(), on vérifie juste le contenu
+    return (choice or "").lower() in ["\\q", "\\exit", "q", "exit", "0"]
 
 
 def show_table(rows):
@@ -169,7 +172,7 @@ def main_menu():
         console.print("  [bold][7][/bold]  Vétérinaires")
         console.print("  [bold][0][/bold]  Quitter")
 
-        choice = ask("\nChoix").strip()
+        choice = ask("\nChoix")
 
         if exit_check(choice):
             break
@@ -206,7 +209,7 @@ def proprietaire_menu():
         console.print("  [bold][7][/bold]  Rechercher par téléphone")
         console.print("  [bold][0][/bold]  Retour")
 
-        choice = ask("\nChoix").strip()
+        choice = ask("\nChoix")
         if exit_check(choice):
             break
 
@@ -285,7 +288,7 @@ def animal_menu():
         console.print("  [bold][6][/bold]  Rechercher par espèce")
         console.print("  [bold][0][/bold]  Retour")
 
-        choice = ask("\nChoix").strip()
+        choice = ask("\nChoix")
         if exit_check(choice):
             break
 
@@ -358,7 +361,7 @@ def consultation_menu():
         console.print("  [bold][5][/bold]  Rechercher par intervalle de dates")
         console.print("  [bold][0][/bold]  Retour")
 
-        choice = ask("\nChoix").strip()
+        choice = ask("\nChoix")
         if exit_check(choice):
             break
 
@@ -427,7 +430,7 @@ def medicament_menu():
         console.print("  [bold][6][/bold]  Rechercher par nom")
         console.print("  [bold][0][/bold]  Retour")
 
-        choice = ask("\nChoix").strip()
+        choice = ask("\nChoix")
         if exit_check(choice):
             break
 
@@ -499,7 +502,7 @@ def ordonnance_menu():
         console.print("  [bold][5][/bold]  Rechercher (par consultation + médicament)")
         console.print("  [bold][0][/bold]  Retour")
 
-        choice = ask("\nChoix").strip()
+        choice = ask("\nChoix")
         if exit_check(choice):
             break
 
@@ -566,7 +569,7 @@ def paiement_menu():
         console.print("  [bold][6][/bold]  Rechercher par ID consultation")
         console.print("  [bold][0][/bold]  Retour")
 
-        choice = ask("\nChoix").strip()
+        choice = ask("\nChoix")
         if exit_check(choice):
             break
 
@@ -639,7 +642,7 @@ def veterinaire_menu():
         console.print("  [bold][7][/bold]  Rechercher par spécialité")
         console.print("  [bold][0][/bold]  Retour")
 
-        choice = ask("\nChoix").strip()
+        choice = ask("\nChoix")
         if exit_check(choice):
             break
 
