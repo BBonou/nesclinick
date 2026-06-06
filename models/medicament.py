@@ -110,3 +110,17 @@ def search_medicament_by_nom(nom):
         return result.fetchall()
     except Exception as e:
         print(f"Erreur : {e}")
+
+
+def medicaments_low_stock():
+    try:
+        with engine.begin() as conn:
+            result = conn.execute(
+                text("""
+                    SELECT * FROM medicament
+                    WHERE stock < 15 
+                """)
+            )
+        return result.fetchall()
+    except Exception as e:
+        print(f"Erreur : {e}")

@@ -1,4 +1,13 @@
+DateTime==6.0
+markdown-it-py==4.2.0
+mdurl==0.1.2
+numpy==2.4.6
+Pygments==2.20.0
 PyMySQL==1.2.0
 python-dotenv==1.2.2
+pytz==2026.2
+rich==15.0.0
+spglib==2.7.0
 SQLAlchemy==2.0.50
 typing_extensions==4.15.0
+zope.interface==8.5

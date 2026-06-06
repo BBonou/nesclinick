@@ -1,5 +1,4 @@
 from sqlalchemy import text
-from sqlalchemy.ext.asyncio import result
 
 from database import engine
 
@@ -114,5 +113,39 @@ def consultation_exists(num_animal, date):
                 }
             )
         return result.scalar() > 0
+    except Exception as e:
+        print(f"Erreur : {e}")
+
+
+def search_consultation_by_date(date):
+    try:
+        with engine.begin() as conn:
+            result = conn.execute(
+                text("""
+                    SELECT * FROM consultation
+                    WHERE DATE(date) = :date
+                """),
+                {
+                    "date": date
+                }
+            )
+        return result.fetchall()
+    except Exception as e:
+        print(f"Erreur : {e}")
+
+
+def historique_animal(num_animal):
+    try:
+        with engine.begin() as conn:
+            result = conn.execute(
+                text("""
+                    SELECT * FROM consultation
+                    WHERE num_animal = :num_animal
+                """),
+                {
+                    "num_animal": num_animal
+                }
+            )
+        return result.fetchall()
     except Exception as e:
         print(f"Erreur : {e}")

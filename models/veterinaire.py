@@ -112,7 +112,7 @@ def search_veterinaire_by_speciality(specialite):
             result = conn.execute(
                 text("""
                     SELECT * FROM veterinaire
-                    WHERE specialite = :specialite
+                    WHERE specialite LIKE :specialite
                 """),
                 {
                     "specialite": specialite
@@ -129,10 +129,10 @@ def veterinaire_exists(num_veterinaire):
             result = conn.execute(
                 text("""
                     SELECT COUNT(*) FROM veterinaire
-                    WHERE num_veterinaire = :num_veterinaire
+                    WHERE num_vet = :num_veterinaire
                 """),
                 {
-                    "num_vetrinaire": num_veterinaire
+                    "num_veterinaire": num_veterinaire
                 }
             )
         return result.scalar() > 0

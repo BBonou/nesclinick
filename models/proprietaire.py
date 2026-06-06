@@ -2,7 +2,7 @@ from sqlalchemy import text
 from database import engine
 
 
-def list_proprietaire():
+def list_proprietaires():
     try:
         with engine.connect() as conn:
             result = conn.execute(
@@ -132,10 +132,10 @@ def search_proprietaire_by_address(adresse):
             result = conn.execute(
                 text("""
                     SELECT * FROM proprietaire
-                    WHERE address LIKE :addresse
+                    WHERE adress LIKE :adresse
                 """),
                 {
-                    "addresse": f"%{adresse}%"
+                    "adresse": f"%{adresse}%"
                 }
             )
         return result.fetchall()
