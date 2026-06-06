@@ -74,7 +74,7 @@ CREATE TABLE `animal` (
   `espece`           VARCHAR(50) NOT NULL,
   `race`             VARCHAR(30) DEFAULT NULL,
   `date_naissance`   DATE        DEFAULT NULL,
-  `num_proprietaire` INT         NOT NULL,
+  `num_proprietaire` INT         NOT NULL
   PRIMARY KEY (`num_animal`),
   KEY `fk_num_proprietaire` (`num_proprietaire`),
   CONSTRAINT `fk_num_proprietaire`
