@@ -17,7 +17,7 @@ def list_paiements():
 
 def add_paiement(montant, date_pay, mode_pay, num_consultation):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             conn.execute(
                 text("""
                     INSERT INTO paiement
@@ -37,7 +37,7 @@ def add_paiement(montant, date_pay, mode_pay, num_consultation):
 
 def delete_paiement(num_paiement):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             conn.execute(
                 text("""
                     DELETE FROM paiement
@@ -53,7 +53,7 @@ def delete_paiement(num_paiement):
 
 def update_paiement(num_paiement, montant, date_pay, mode_pay, num_consultation):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             conn.execute(
                 text("""
                     UPDATE paiement
@@ -77,7 +77,7 @@ def update_paiement(num_paiement, montant, date_pay, mode_pay, num_consultation)
 
 def search_paiement_by_id(num_paiement):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             result = conn.execute(
                 text("""
                     SELECT * FROM paiement
@@ -94,7 +94,7 @@ def search_paiement_by_id(num_paiement):
 
 def search_paiement_by_consultation(num_consultation):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             result = conn.execute(
                 text("""
                         SELECT * FROM paiement

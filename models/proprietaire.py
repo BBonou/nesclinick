@@ -17,7 +17,7 @@ def list_proprietaire():
 
 def add_proprietaire(nom, prenom, telephone, adresse):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             conn.execute(
                 text("""
                     INSERT INTO proprietaire
@@ -37,7 +37,7 @@ def add_proprietaire(nom, prenom, telephone, adresse):
 
 def delete_proprietaire(num_proprietaire):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             conn.execute(
                 text("""
                     DELETE FROM proprietaire
@@ -53,7 +53,7 @@ def delete_proprietaire(num_proprietaire):
 
 def update_proprietaire(num_proprietaire, nom, prenom, telephone, adresse):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             conn.execute(
                 text("""
                     UPDATE proprietaire
@@ -77,7 +77,7 @@ def update_proprietaire(num_proprietaire, nom, prenom, telephone, adresse):
 
 def search_proprietaire_by_name(nom):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             result = conn.execute(
                 text("""
                     SELECT * FROM proprietaire
@@ -94,7 +94,7 @@ def search_proprietaire_by_name(nom):
 
 def search_proprietaire_by_surname(prenom):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             result = conn.execute(
                 text("""
                     SELECT * FROM proprietaire
@@ -111,7 +111,7 @@ def search_proprietaire_by_surname(prenom):
 
 def search_proprietaire_by_telephone(telephone):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             result = conn.execute(
                 text("""
                     SELECT * FROM proprietaire
@@ -128,7 +128,7 @@ def search_proprietaire_by_telephone(telephone):
 
 def search_proprietaire_by_address(adresse):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             result = conn.execute(
                 text("""
                     SELECT * FROM proprietaire
@@ -145,7 +145,7 @@ def search_proprietaire_by_address(adresse):
 
 def proprietaire_exists(num_proprietaire):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             result = conn.execute(
                 text("""
                     SELECT COUNT(*) FROM proprietaire

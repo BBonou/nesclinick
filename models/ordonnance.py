@@ -17,7 +17,7 @@ def list_ordonnances():
 
 def add_ordonnance(num_consultation, reference, posologie, duree):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             conn.execute(
                 text("""
                     INSERT INTO ordonnance
@@ -37,7 +37,7 @@ def add_ordonnance(num_consultation, reference, posologie, duree):
 
 def delete_ordonnance(num_consultation, reference):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             conn.execute(
                 text("""
                     DELETE FROM ordonnance
@@ -55,7 +55,7 @@ def delete_ordonnance(num_consultation, reference):
 
 def update_ordonnance(num_consultation, reference, posologie, duree):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             conn.execute(
                 text("""
                     UPDATE ordonnance
@@ -77,7 +77,7 @@ def update_ordonnance(num_consultation, reference, posologie, duree):
 
 def search_ordonnance(num_consultation, reference):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             result = conn.execute(
                 text("""
                     SELECT * FROM ordonnance
@@ -96,7 +96,7 @@ def search_ordonnance(num_consultation, reference):
 
 def ordonnance_exists(num_consultation, reference):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             result = conn.execute(
                 text("""
                     SELECT COUNT(*) FROM ordonnance

@@ -18,7 +18,7 @@ def list_medicaments():
 
 def add_medicament(reference, nom, dosage, prix_unitaire, stock):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             conn.execute(
                 text("""
                     INSERT INTO medicament
@@ -39,7 +39,7 @@ def add_medicament(reference, nom, dosage, prix_unitaire, stock):
 
 def delete_medicament(reference):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             conn.execute(
                 text("""
                     DELETE FROM medicament
@@ -56,7 +56,7 @@ def delete_medicament(reference):
 
 def update_medicament(reference, nom, dosage, prix_unitaire, stock):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             conn.execute(
                 text("""
                     UPDATE medicament
@@ -80,7 +80,7 @@ def update_medicament(reference, nom, dosage, prix_unitaire, stock):
 
 def search_medicament_by_reference(reference):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             result = conn.execute(
                 text("""
                     SELECT * FROM medicament
@@ -97,7 +97,7 @@ def search_medicament_by_reference(reference):
 
 def search_medicament_by_nom(nom):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             result = conn.execute(
                 text("""
                     SELECT * FROM medicament

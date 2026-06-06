@@ -19,7 +19,7 @@ def list_consultations():
 
 def add_consultation(date, diagnostic, motant, num_veterinaire, num_animal):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             conn.execute(
                 text("""
                     INSERT INTO consultation
@@ -40,7 +40,7 @@ def add_consultation(date, diagnostic, motant, num_veterinaire, num_animal):
 
 def delete_consultation(num_consultation):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             conn.execute(
                 text("""
                     DELETE FROM consultation
@@ -56,7 +56,7 @@ def delete_consultation(num_consultation):
 
 def update_consultation(num_consultation, date, diagnostic, montant, num_vet, num_animal):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             conn.execute(
                 text("""
                     UPDATE consultation
@@ -83,7 +83,7 @@ def update_consultation(num_consultation, date, diagnostic, montant, num_vet, nu
 
 def search_consultation_interval(start_date, end_date):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             result = conn.execute(
                 text("""
                     SELECT * FROM consultation
@@ -101,7 +101,7 @@ def search_consultation_interval(start_date, end_date):
 
 def consultation_exists(num_animal, date):
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             result = conn.execute(
                 text("""
                     SELECT COUNT(*) FROM consultation
